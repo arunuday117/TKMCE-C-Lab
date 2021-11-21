@@ -72,7 +72,7 @@ void count()
 void search()
 {
 	temp=header;
-	int key,pos=0;
+	int key,pos=0,flag=0;
 	printf("Enter the value to be searched : ");
 	scanf("%d",&key);
 	while(temp->link!=NULL)
@@ -81,16 +81,14 @@ void search()
 		pos=pos+1;
 		if(temp->data==key)
 		{
+			printf("%d found at %d\n",key,pos);
+			flag=flag+1;
 			break;
 		}
 	}
-	if(pos==-1)	
+	if(flag==0)	
 	{
-		printf("Data not found in list");
-	}
-	else
-	{
-		printf("%d found at %d\n",key,pos);
+		printf("Data not found in list\n");
 	}
 }
 
