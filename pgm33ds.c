@@ -95,11 +95,18 @@ void search()
 void display()
 {
 	temp=header;
-	while(temp->link!=NULL)
+	if(header->link==NULL)
 	{
+		printf("\nUnderflow\n");
+	}
+	else
+	{
+		while(temp->link!=NULL)
+		{
 		temp=temp->link;
 		printf("%d\t",temp->data);
+		}
+		printf("\n");
 	}
-	printf("\n");
 }
 

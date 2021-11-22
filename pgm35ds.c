@@ -79,6 +79,10 @@ void pop()
 void display()
 {
 	temp=header;
+	if(header->link==NULL)
+	{
+		printf("\nUnderflow\n");
+	}
 	while(temp->link!=NULL)
 	{
 		temp=temp->link;
