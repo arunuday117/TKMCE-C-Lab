@@ -8,6 +8,7 @@ int queue[N];
 void insert();
 void delete();
 void display();
+void peek();
 int main()
 {
 	int c=0,option;
@@ -18,6 +19,7 @@ int main()
 		printf("1. Insert\n");
 		printf("2. Delete\n");
 		printf("3. Display queue\n");
+		printf("4. Peek\n");
 	    printf("Enter your option : ");
 	    scanf("%d",&option);
 		switch(option)
@@ -27,6 +29,8 @@ int main()
 		case 2:delete();
 			break;
 		case 3:display();
+			break;
+		case 4:peek();
 			break;
 		default:printf("Invalid Operator");
 		}
@@ -39,6 +43,8 @@ int main()
 void insert()
 {
 	int val,temp;
+	printf("Front = %d",front);
+	printf("Rear = %d\n",rear);
 	if((front==0) && (rear==N-1))
 	{
 		printf("Overflow\n");
@@ -46,7 +52,7 @@ void insert()
 	else
 	{
 		printf("Enter the data : ");
-		scanf("%d",&val);
+		scanf("%d",&val);	
 		if((front==-1) && (rear==-1))
 		{
 			front=rear=0;
@@ -54,7 +60,6 @@ void insert()
 		}
 		else if((front!=0) && (rear==N-1))
 		{
-			printf("front");
 			rear=0;
 			queue[rear]=val;
 		}
@@ -77,6 +82,8 @@ void insert()
 void delete()
 {
 	int val;
+	printf("Front = %d",front);
+	printf("Rear = %d\n",rear);
 	if(front==-1)
 	{
 		printf("Underflow\n");
@@ -90,7 +97,7 @@ void delete()
 			front=rear=-1;
 		}
 		else if(front==N-1)
-		{
+		{	
 			printf("Data deleted from queue : %d \n",queue[front]);
 			val=queue[front];
 			front=0;
@@ -107,6 +114,8 @@ void delete()
 void display()
 {
 	int i;
+	printf("Front = %d",front);
+	printf("Rear = %d\n",rear);
 	if((front==-1)&&(rear==-1))
 	{
 		printf("Queue Empty\n");
@@ -120,17 +129,39 @@ void display()
 				printf("%d\t",queue[i]);
 			}
 		}
-		else
+		else if((front==rear))
 		{
-			for(i=front;i<=N;i++)
+			for(i=front;i<=rear;i++)
 			{
 				printf("%d\t",queue[i]);
 			}
-			
-			
+		}
+		else
+		{
+			for(i=0;i<=rear;i++)
+			{
+				printf("%d\t",queue[i]);
+			}
+			for(i=front;i<N;i++)
+			{
+				printf("%d\t",queue[i]);
+			}
 		}
 		printf("\n");
 	}
 }
+void peek()
+{
+	if(front==-1)
+	{
+		printf("Queue Empty\n");
+	}
+	else
+	{
+		printf("First Element in the queue : ");
+		printf("%d\n",queue[front]);
+	}
+}
+	
 
 
