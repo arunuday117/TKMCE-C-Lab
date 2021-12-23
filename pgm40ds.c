@@ -3,74 +3,71 @@
 
 struct tree
 {
-	struct node*left;
+	struct tree*left;
 	int data;
-	struct node*right;
+	struct tree*right;
 };
 
-struct tree*header,*temp,*newnode,*ptr,*preptr;
-void insert();
-void preorder();
-void inorder();
-void postorder();
+struct tree *create()
+{
+	int item;
+	struct tree *node;
+	node=(struct tree *)malloc(sizeof(struct tree));
+	printf("\nEnter the data (insert 0 if no child) :");
+	scanf("%d",&item);
+	if(item==0)
+	{
+		return NULL;
+	}
+	node->data=item;
+	printf("Enter the left child of %d ",node->data);
+	node->left=create();
+	printf("Enter the right child of %d ",node->data);
+	node->right=create();
+	return node;
+}
+
+void preorder(struct tree *node)
+{
+	if(node!=NULL)
+	{
+		printf("%d",node->data);
+		preorder(node->left);
+		preorder(node->right);
+	}
+}
+void inorder(struct tree *node)
+{
+	if(node!=NULL)
+	{
+		inorder(node->left);
+		printf("%d",node->data);
+		inorder(node->right);
+	}
+}
+void postorder(struct tree *node)
+{
+	if(node!=NULL)
+	{
+		postorder(node->left);
+		postorder(node->right);
+		printf("%d",node->data);
+	}
+}
+
+
 int main()
 {
-	int c=0,option;
-	header=(struct node*)malloc(sizeof(struct node));
-	header->left=NULL;
-	header->right=NULL;
-	printf("\n**** Doubly Linked List ****\n");
-	while(c==0)
-	{
-		printf("\n**** Main Menu ****\n");
-		printf("1. Insert\n");
-		printf("2. preorder\n");
-		printf("3. inorder\n");
-		printf("4. postorder\n");
-	    printf("Enter your option : ");
-	    scanf("%d",&option);
-		switch(option)
-		{
-		case 1:insert();
-			break;
-		case 2:preorder();
-			break;
-		case 3:inorder();
-			break;
-		case 4:postorder();
-			break;
-		default:printf("Invalid Operator");
-		}
-		printf("Do you want to continue(0/1) : ");
-		scanf("%d",&c);
-	}
+	struct tree *root;
+	root=create();
+	printf("\nPreorder traversal of the node : ");
+	preorder(root);
+	printf("\nInorder traversal of the node : ");
+	inorder(root);
+	printf("\nPostorder traversal of the node : ");
+	postorder(root);
 	return 0;
 }
 
-void insert()
-{
-	int val;
-	newnode=(struct node*)malloc(sizeof(struct node));
-	printf("Enter the data : ");
-	scanf("%d",&val);
-	newnode->data=val;
-	newnode->prev=header;
-	newnode->next=header->next;	
-	header->next=newnode;
-}
 
-void preorder()
-{
-	
-}
-
-void inorder()
-{
-
-}
-
-void postorder()
-{
-	
-}
 
